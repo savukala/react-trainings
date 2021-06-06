@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import Todolist from './components/Todolist';
+import NotFound from './components/NotFound';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <div>
+          <Link to="/">Home</Link>{' '}
+          <Link to="/todolist">Todolist</Link>{' '}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/todolist" component={Todolist} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
