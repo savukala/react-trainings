@@ -1,3 +1,7 @@
+# Welcome to this repository of react fundamentals.
+These were tasks from Metropolia Uni to complete react fundamentals course (3 ects).
+Please do find all the different codebases on their respective branches.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
