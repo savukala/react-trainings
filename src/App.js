@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState({});
+  const [userid, setUserid] = useState('')
+
+  const fetchData = () => {
+    fetch('https://reqres.in/api/users/' + userid)
+    .then(response => {
+      if (response.status !== 200) {
+        throw new Error('Response status not ok');
+      }
+
+      return response.json();
+    })
+    .then(resData => {
+      setUser(resData.data);
+    })
+  };
+
+  const inputChanged = (event) => {
+    setUserid(event.target.value);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input placeholder="User ID" value={userid} onChange={inputChanged} />
+      <button onClick={fetchData}>Fetch</button>
+      <p>{user.first_name} {user.last_name} {user.email}</p>
     </div>
   );
 }
