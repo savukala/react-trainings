@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [trivia, setTrivia] = useState({});
+
+
+  const fetchData = () => {
+    fetch('https://opentdb.com/api.php?amount=1')
+    .then(response => {
+      if (response.status !== 200) {
+        throw new Error('Response status not ok');
+      }
+
+      return response.json();
+    })
+    .then(resData => {
+      /* console.log(resData.results[0].question); */
+      setTrivia(resData.results[0]);
+      
+      
+    })
+  };
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <button onClick={fetchData}>New Question</button>
+      <p>{trivia.question}</p>
     </div>
   );
 }
